@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#  A Script that configures a new Ubuntu machine to Perform a 301-redirection
+
+# Upadating Packages before Installations
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Creating an index.html
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Performing a Redirection
+string_for_replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/antarsidgi permanent;"
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+
+# Restarting Nginx
+sudo service nginx restart

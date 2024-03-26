@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Commands to install Nginx
+
+# Updating Packages
+sudo apt-get update
+sudo apt-get -y install nginx
+
+# Configuring the Uncomplicated Firewall (UFW)
+sudo ufw allow 'Nginx HTTP'
+
+# Creating an index.html page
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Testing Nginx
+sudo nginx -t
+
+# Restarting Nginx
+sudo service nginx start
